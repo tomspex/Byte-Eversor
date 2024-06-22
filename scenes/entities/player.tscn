@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://clr5xlftfiqq7"]
+[gd_scene load_steps=5 format=3 uid="uid://clr5xlftfiqq7"]
 
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_5qcaj"]
+[ext_resource type="Script" path="res://scripts/misc/crosshair.gd" id="2_67gxd"]
+[ext_resource type="Theme" uid="uid://b6u7qwmje5eat" path="res://themes/misc/main.tres" id="3_oohip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyd21"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_5qcaj")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
@@ -15,3 +17,65 @@ shape = SubResource("CapsuleShape3D_xyd21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
+cull_mask = 1048573
+
+[node name="WeaponViewport" type="SubViewportContainer" parent="Head/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Head/Camera/WeaponViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="WeaponCamera" type="Camera3D" parent="Head/Camera/WeaponViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+cull_mask = 1047554
+
+[node name="GUI" type="CanvasLayer" parent="Head/Camera"]
+
+[node name="Crosshair" type="CenterContainer" parent="Head/Camera/GUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("2_67gxd")
+
+[node name="Top" type="Line2D" parent="Head/Camera/GUI/Crosshair"]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="Head/Camera/GUI/Crosshair"]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="Head/Camera/GUI/Crosshair"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="Head/Camera/GUI/Crosshair"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="HealthMeter" type="Label" parent="Head/Camera/GUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -89.0
+offset_right = 289.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme = ExtResource("3_oohip")
+text = "100"
+
+[node name="InteractRaycast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -2)

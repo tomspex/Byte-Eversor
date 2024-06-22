@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpm5320e13pvx"]
+
+[ext_resource type="Script" path="res://scripts/entities/pistol_hitscanner.gd" id="1_2asop"]
+[ext_resource type="PackedScene" uid="uid://phttp7se1ip6" path="res://scenes/weapons/colt.tscn" id="2_sh5my"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42ich"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dk3hi"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wj5sw"]
+material = SubResource("StandardMaterial3D_dk3hi")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nwme7"]
+radius = 7.0
+
+[node name="PistolHitscanner" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_2asop")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_42ich")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wj5sw")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.5
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Sight" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1000)
+
+[node name="Aim" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1000)
+
+[node name="Colt" parent="Head" instance=ExtResource("2_sh5my")]
+transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0.6, -0.3, 0)
+
+[node name="DetectionRange" type="Area3D" parent="."]
+
+[node name="DetectionSphere" type="CollisionShape3D" parent="DetectionRange"]
+shape = SubResource("SphereShape3D_nwme7")
+
+[node name="FireCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="FireLag" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="WalkCooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="DetectionRange" to="." method="alert"]
+[connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]
+[connection signal="timeout" from="FireLag" to="." method="_on_fire_lag_timeout"]
+[connection signal="timeout" from="WalkCooldown" to="." method="_on_walk_cooldown_timeout"]

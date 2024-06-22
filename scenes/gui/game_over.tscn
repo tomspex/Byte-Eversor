@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://d285crx8l4oaj"]
+
+[ext_resource type="Theme" uid="uid://b6u7qwmje5eat" path="res://themes/misc/main.tres" id="1_r4ih8"]
+[ext_resource type="Script" path="res://scripts/gui/game_over.gd" id="2_j6yos"]
+[ext_resource type="AudioStream" uid="uid://hurlx0l8uma3" path="res://audio/music/game_over.mp3" id="3_eas7i"]
+[ext_resource type="Texture2D" uid="uid://cwrfvy6xuqsyx" path="res://textures/gui/game_over.png" id="3_r7pwx"]
+
+[node name="GameOver" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r4ih8")
+script = ExtResource("2_j6yos")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_r7pwx")
+
+[node name="GameOver" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -608.0
+offset_top = -416.0
+offset_right = -63.0
+offset_bottom = -279.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Game Over"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 536.0
+offset_right = 376.0
+offset_bottom = 624.0
+text = "Restart"
+
+[node name="Title Screen" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 640.0
+offset_right = 376.0
+offset_bottom = 728.0
+text = "Title Screen"
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 744.0
+offset_right = 376.0
+offset_bottom = 832.0
+text = "Exit
+"
+
+[node name="Music" type="Node" parent="."]
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_eas7i")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
