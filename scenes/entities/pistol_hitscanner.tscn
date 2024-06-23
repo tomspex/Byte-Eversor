@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpm5320e13pvx"]
+[gd_scene load_steps=8 format=3 uid="uid://dpm5320e13pvx"]
 
 [ext_resource type="Script" path="res://scripts/entities/pistol_hitscanner.gd" id="1_2asop"]
 [ext_resource type="PackedScene" uid="uid://phttp7se1ip6" path="res://scenes/weapons/colt.tscn" id="2_sh5my"]
+[ext_resource type="AudioStream" uid="uid://cyxe0v1bhxgbs" path="res://audio/sfx/misc/dodgeball_hit.mp3" id="3_jrkvs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42ich"]
 
@@ -57,6 +58,12 @@ one_shot = true
 
 [node name="WalkCooldown" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="SFX"]
+stream = ExtResource("3_jrkvs")
+max_distance = 100.0
 
 [connection signal="body_entered" from="DetectionRange" to="." method="alert"]
 [connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]

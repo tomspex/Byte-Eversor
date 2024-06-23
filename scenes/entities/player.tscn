@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://clr5xlftfiqq7"]
+[gd_scene load_steps=6 format=3 uid="uid://clr5xlftfiqq7"]
 
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_5qcaj"]
 [ext_resource type="Script" path="res://scripts/misc/crosshair.gd" id="2_67gxd"]
 [ext_resource type="Theme" uid="uid://b6u7qwmje5eat" path="res://themes/misc/main.tres" id="3_oohip"]
+[ext_resource type="AudioStream" uid="uid://cyxe0v1bhxgbs" path="res://audio/sfx/misc/dodgeball_hit.mp3" id="4_7romo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyd21"]
 
@@ -77,5 +78,11 @@ grow_vertical = 0
 theme = ExtResource("3_oohip")
 text = "100"
 
-[node name="InteractRaycast" type="RayCast3D" parent="Head"]
+[node name="InteractRaycast" type="RayCast3D" parent="Head/Camera"]
 target_position = Vector3(0, 0, -2)
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="SFX"]
+stream = ExtResource("4_7romo")
+max_distance = 100.0

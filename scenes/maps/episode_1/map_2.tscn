@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cth1aupqhjq4s"]
+[gd_scene load_steps=14 format=3 uid="uid://cth1aupqhjq4s"]
 
 [ext_resource type="PackedScene" uid="uid://clr5xlftfiqq7" path="res://scenes/entities/player.tscn" id="1_6xt8y"]
+[ext_resource type="PackedScene" uid="uid://qxs0p4md2rf7" path="res://scenes/gui/pause_menu.tscn" id="2_id0xo"]
 [ext_resource type="Texture2D" uid="uid://b2fkm46hv7w27" path="res://textures/misc/hills_grass.png" id="2_nbl86"]
 [ext_resource type="PackedScene" uid="uid://dpm5320e13pvx" path="res://scenes/entities/pistol_hitscanner.tscn" id="3_lu17d"]
 [ext_resource type="AudioStream" uid="uid://cyqgtqmv4kf3l" path="res://audio/music/e1m2.mp3" id="4_pnbjb"]
@@ -283,3 +284,5 @@ environment = SubResource("Environment_2vqdn")
 stream = ExtResource("4_pnbjb")
 autoplay = true
 bus = &"Music"
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_id0xo")]

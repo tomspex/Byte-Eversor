@@ -2,7 +2,8 @@ extends CharacterBody3D
 
 #input properties
 #NOTE: might wanna move this to a global script
-const MOUSE_SENSITIVITY = 0.01
+const MOUSE_SENSITIVITY = 0.005
+
 const KEY_SENSITIVITY = 0.05
 
 enum {
@@ -55,7 +56,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var head = $Head
 @onready var camera = $Head/Camera
 @onready var weapon_camera = $Head/Camera/WeaponViewport/SubViewport/WeaponCamera
-@onready var interact_raycast = $Head/InteractRaycast
+@onready var interact_raycast = $Head/Camera/InteractRaycast
+@onready var hit_sfx = $SFX/Hit
 
 @onready var health_meter = $Head/Camera/GUI/HealthMeter
 
@@ -168,7 +170,7 @@ func _physics_process(delta):
 		weapon_instance.fire()
 	
 	if weapon_instance.has_method("aim_from"):
-		weapon_instance.aim_from(camera.global_position)
+		weapon_instance.aim_from(head.global_position)
 	
 	#interact
 	if Input.is_action_just_pressed("interact"):
@@ -212,6 +214,7 @@ func damage(amount):
 	health -= amount
 	health = clamp(health, 0, MAX_HEALTH)
 	shake(10)
+	hit_sfx.play()
 	
 	if health == 0:
 		SceneManager.change_scene("res://scenes/gui/game_over.tscn")

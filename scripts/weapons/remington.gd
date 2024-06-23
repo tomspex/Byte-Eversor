@@ -11,7 +11,6 @@ const DAMAGE = 20
 @onready var fire_sfx = $SFX/Fire
 
 func _ready():
-	print("SHOTGUN TIME!!!")
 	
 	randomize()
 	randomize_raycasts()
@@ -20,14 +19,15 @@ func fire():
 	if !cooldown.is_stopped():
 		return
 	
-	print("BAM!!!")
-	
 	randomize_raycasts()
 	for r in raycasts.get_children():
 		if r.is_colliding():
 			var collider = r.get_collider()
 			var collider_normal = r.get_collision_normal()
 			var collider_point = r.get_collision_point()
+			
+			if !collider: #if an enemy is shot at twice in the same frame, the game crashes. This is here to try and prevent that.
+				return
 			
 			var bullet_hole_decal_instance = Weapons.bullet_hole_decal.instantiate()
 			collider.add_child(bullet_hole_decal_instance)

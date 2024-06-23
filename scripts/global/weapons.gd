@@ -10,7 +10,6 @@ enum {
 const weapons = [
 	{
 		"name": "Colt 1911",
-		"damage": 40,
 		"scene": "res://scenes/weapons/colt.tscn",
 		"position": Vector3(0.437, -0.44, -1)
 	},

@@ -1,7 +1,7 @@
 extends Node3D
 
 #weapon stats
-const DAMAGE = 40
+const DAMAGE = 20
 
 @export var players = false
 
@@ -11,8 +11,6 @@ const DAMAGE = 40
 @onready var fire_sfx = $SFX/Fire
 
 func _ready():
-	print("WE'RE PISTOLING!!!")
-	
 	if players:
 		for m in $Model.get_children():
 			m.set_layer_mask_value(1, false)
@@ -21,8 +19,6 @@ func _ready():
 func fire():
 	if !cooldown.is_stopped():
 		return
-	
-	print("PEW!!!")
 	
 	animator.stop()
 	animator.play("fire")
@@ -34,6 +30,9 @@ func fire():
 		var collider = raycast.get_collider()
 		var collider_normal = raycast.get_collision_normal()
 		var collider_point = raycast.get_collision_point()
+		
+		if !collider: #if an enemy is shot at twice in the same frame, the game crashes. This is here to try and prevent that.
+			return
 		
 		var bullet_hole_decal_instance = Weapons.bullet_hole_decal.instantiate()
 		collider.add_child(bullet_hole_decal_instance)

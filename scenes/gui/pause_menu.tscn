@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://qxs0p4md2rf7"]
+
+[ext_resource type="Theme" uid="uid://b6u7qwmje5eat" path="res://themes/misc/main.tres" id="1_hb2ib"]
+[ext_resource type="Script" path="res://scripts/gui/pause_menu.gd" id="2_2j68y"]
+[ext_resource type="Shader" path="res://shaders/post/blur.gdshader" id="3_b6kxc"]
+[ext_resource type="Texture2D" uid="uid://rs41fmknhi32" path="res://textures/gui/title.png" id="4_7q4a1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4ius"]
+shader = ExtResource("3_b6kxc")
+shader_parameter/radius = 4.0
+shader_parameter/steps = 32
+shader_parameter/vertex_expand = 1.0
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hb2ib")
+script = ExtResource("2_2j68y")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_e4ius")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.6
+anchor_bottom = 0.25
+offset_left = -135.0
+offset_top = -32.0
+offset_right = 135.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_7q4a1")
+
+[node name="Continue" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.433333
+anchor_right = 0.7
+anchor_bottom = 0.529167
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="Options" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.55
+anchor_right = 0.7
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+metadata/_edit_use_anchors_ = true
+
+[node name="Title Screen" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.666667
+anchor_right = 0.7
+anchor_bottom = 0.766667
+grow_horizontal = 2
+grow_vertical = 2
+text = "Title Screen"
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.783333
+anchor_right = 0.7
+anchor_bottom = 0.883333
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

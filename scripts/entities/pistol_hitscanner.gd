@@ -13,7 +13,7 @@ enum {
 
 #stats
 var state = ATTACK
-var health = 40
+var health = 20
 const MASS = 4
 const SPEED = 20
 const ROTATION_SPEED = 2
@@ -31,9 +31,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var sight = $Head/Sight
 @onready var aim = $Head/Aim
 @onready var weapon = $Head/Colt
+@onready var hit_sfx = $SFX/Hit
+
+@onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready():
 	randomize()
+
+func _process(_delta):
+	update_target_location()
 
 func _physics_process(delta):
 	if !is_on_floor():
@@ -58,15 +64,16 @@ func _physics_process(delta):
 func damage(level):
 	if state == IDLE:
 		state = ALERT
-	
-	print("%s: Bruh. I took %s damage. 💀💀💀" % [name, level])
 	health -= level
+	hit_sfx.play()
+	
 	if health <= 0:
-		print("%s: MEIN LEBEN" % name)
-		print("%s left the game." % name)
 		queue_free()
 
 func alert(body):
+	if !body: #if an enemy is shot at twice in the same frame, the game crashes. This is here to try and prevent that.
+		return
+	
 	if body.is_in_group("player"):
 		target = body
 		state = ALERT
@@ -76,6 +83,10 @@ func alert(body):
 func _on_fire_cooldown_timeout():
 	if aim.is_colliding():
 		var collider = aim.get_collider()
+		
+		if !collider: #if an enemy is shot at twice in the same frame, the game crashes. This is here to try and prevent that.
+			return
+		
 		if collider.is_in_group("player") and collider.has_method("damage"):
 			fire_lag.start()
 
@@ -86,7 +97,7 @@ func _on_walk_cooldown_timeout():
 func _on_fire_lag_timeout():
 	weapon.fire()
 
-func update_target_location(location):
-	sight.target_position = to_local(location)
+func update_target_location():
+	sight.target_position = to_local(player.global_position)
 	if sight.is_colliding():
 		alert(sight.get_collider())
