@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddcxjfnf32ivx"]
+[gd_scene load_steps=6 format=3 uid="uid://ddcxjfnf32ivx"]
 
 [ext_resource type="Script" path="res://scripts/misc/scene_manager.gd" id="1_s86xp"]
+[ext_resource type="Shader" path="res://shaders/post/quantize.gdshader" id="2_7dgg4"]
 
 [sub_resource type="Animation" id="Animation_j7op0"]
 resource_name = "fade"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,6 +23,10 @@ _data = {
 "fade": SubResource("Animation_j7op0")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lrx8"]
+shader = ExtResource("2_7dgg4")
+shader_parameter/amount = 1
+
 [node name="SceneManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_s86xp")
@@ -31,11 +36,23 @@ libraries = {
 "": SubResource("AnimationLibrary_wb261")
 }
 
-[node name="FadeTransition" type="ColorRect" parent="."]
-z_index = 9
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="FadeTransition" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="Quantization" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_3lrx8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

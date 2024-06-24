@@ -12,7 +12,7 @@ enum {
 }
 
 #stats
-var state = ATTACK
+var state = IDLE
 var health = 20
 const MASS = 4
 const SPEED = 20

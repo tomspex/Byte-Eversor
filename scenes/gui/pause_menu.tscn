@@ -14,7 +14,6 @@ shader_parameter/vertex_expand = 1.0
 [node name="PauseMenu" type="Control"]
 process_mode = 3
 visible = false
-z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,59 +48,47 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_7q4a1")
 
-[node name="Continue" type="Button" parent="."]
-texture_filter = 1
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.433333
-anchor_right = 0.7
-anchor_bottom = 0.529167
-offset_bottom = 1.52588e-05
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -328.0
+offset_top = -640.0
+offset_right = 328.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
 text = "Continue"
 metadata/_edit_use_anchors_ = true
 
-[node name="Options" type="Button" parent="."]
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.55
-anchor_right = 0.7
-anchor_bottom = 0.65
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "Options"
 metadata/_edit_use_anchors_ = true
 
-[node name="Title Screen" type="Button" parent="."]
+[node name="Title Screen" type="Button" parent="MarginContainer/VBoxContainer"]
 texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.666667
-anchor_right = 0.7
-anchor_bottom = 0.766667
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "Title Screen"
 metadata/_edit_use_anchors_ = true
 
-[node name="Exit" type="Button" parent="."]
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.783333
-anchor_right = 0.7
-anchor_bottom = 0.883333
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "Exit"
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Title Screen" to="." method="_on_title_screen_pressed"]
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Title Screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

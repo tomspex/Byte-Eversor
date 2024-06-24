@@ -285,4 +285,6 @@ stream = ExtResource("4_pnbjb")
 autoplay = true
 bus = &"Music"
 
-[node name="PauseMenu" parent="." instance=ExtResource("2_id0xo")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_id0xo")]

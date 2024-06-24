@@ -221,7 +221,7 @@ _data = {
 "fire": SubResource("Animation_sgbcf")
 }
 
-[node name="Colt" type="Node3D"]
+[node name="EnemyColt" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
 script = ExtResource("1_vanx8")
 

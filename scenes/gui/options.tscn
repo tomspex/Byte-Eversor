@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://db1ktyjqc1yan"]
+
+[ext_resource type="Theme" uid="uid://b6u7qwmje5eat" path="res://themes/misc/main.tres" id="1_buxwp"]
+[ext_resource type="Script" path="res://scripts/gui/options.gd" id="2_nutcm"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_buxwp")
+script = ExtResource("2_nutcm")
+
+[node name="OptionsMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -318.0
+offset_top = 320.0
+offset_right = 318.0
+offset_bottom = 920.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Video" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Video"
+metadata/_edit_use_anchors_ = true
+
+[node name="Audio" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Audio"
+metadata/_edit_use_anchors_ = true
+
+[node name="Gameplay" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Gameplay"
+metadata/_edit_use_anchors_ = true
+
+[node name="Controls" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Controls"
+metadata/_edit_use_anchors_ = true
+
+[node name="Return" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Return"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="OptionsMenu/MarginContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="OptionsMenu/MarginContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]

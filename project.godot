@@ -25,7 +25,6 @@ SceneManager="*res://scenes/misc/scene_manager.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=960
-window/stretch/mode="canvas_items"
 window/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 
 [input]

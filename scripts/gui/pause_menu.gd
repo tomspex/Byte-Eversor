@@ -2,7 +2,7 @@ extends Control
 
 var paused = false
 
-@onready var continue_button = $Continue
+@onready var continue_button = $MarginContainer/VBoxContainer/Continue
 
 func _ready():
 	continue_button.grab_focus()

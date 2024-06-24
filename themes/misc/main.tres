@@ -1,5 +1,79 @@
-[gd_resource type="Theme" format=3 uid="uid://b6u7qwmje5eat"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b6u7qwmje5eat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0ega"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.454902, 0.454902, 0.454902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d51"]
+bg_color = Color(0.168627, 0.172549, 0.211765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.454902, 0.454902, 0.454902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnudm"]
+bg_color = Color(0.192157, 0.223529, 0.286275, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.454902, 0.454902, 0.454902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfysq"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.454902, 0.454902, 0.454902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
 
 [resource]
 default_font_size = 100
-Button/font_sizes/font_size = 24
+Button/font_sizes/font_size = 32
+Button/styles/disabled = SubResource("StyleBoxFlat_k0ega")
+Button/styles/focus = SubResource("StyleBoxFlat_54d51")
+Button/styles/hover = SubResource("StyleBoxFlat_xnudm")
+Button/styles/normal = SubResource("StyleBoxFlat_k0ega")
+Button/styles/pressed = SubResource("StyleBoxFlat_yfysq")
+MarginContainer/constants/margin_bottom = 145
+MarginContainer/constants/margin_left = 100
+MarginContainer/constants/margin_right = 100
+MarginContainer/constants/margin_top = 100
+VBoxContainer/constants/separation = 25
